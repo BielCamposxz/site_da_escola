@@ -1,0 +1,40 @@
+﻿@model IEnumerable<site_da_escola.Models.EventosModel>
+
+@{
+    ViewData["Title"] = "Eventos";
+    Layout = "_Layout";
+}
+
+<main class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Eventos da Escola</h2>
+        <p class="text-muted fs-5">
+            Confira os eventos mais recentes realizados pela nossa comunidade escolar.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var evento in Model)
+        {
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <img src="@Url.Action("Imagem", "Eventos", new { id = evento.Id })"
+                         class="card-img-top rounded-top"
+                         alt="@evento.Titulo"
+                         style="height: 220px; object-fit: cover;" />
+
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">@evento.Titulo</h5>
+                        <p class="card-text text-muted">@evento.Descricao</p>
+                    </div>
+
+                    <div class="card-footer bg-white border-0 text-end">
+                        <small class="text-muted">
+                            Publicado em: @evento.DataDePostagem.ToString("dd/MM/yyyy")
+                        </small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</main>

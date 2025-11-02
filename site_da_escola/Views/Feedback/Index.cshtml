@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Feedback";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <!-- Título -->
+    <div class="text-center mb-5 animate__animated animate__fadeInDown">
+        <h1 class="display-4 fw-bold text-primary">Envie seu Feedback</h1>
+        <p class="lead text-muted">Sua opinião ajuda a Escola Claudinor Ribeiro a melhorar cada vez mais!</p>
+    </div>
+
+    @if (false)
+    {
+        <!-- Usuário não logado -->
+        <div class="alert alert-warning text-center shadow-sm animate__animated animate__fadeInUp">
+            <h5>Para enviar feedback, você precisa estar logado.</h5>
+            <div class="mt-3">
+                <a asp-action="Login" asp-controller="Home" class="btn btn-outline-primary me-2 fw-bold">
+                    <i class="bi bi-box-arrow-in-right me-1"></i>Entrar
+                </a>
+                <a asp-action="Cadastro" asp-controller="Home" class="btn btn-primary fw-bold">
+                    <i class="bi bi-person-plus-fill me-1"></i>Cadastrar
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Formulário de feedback -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 animate__animated animate__fadeInUp">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-primary text-white rounded-top-4 text-center">
+                        <h4 class="mb-0 fw-bold"><i class="bi bi-pencil-square me-2"></i>Deixe seu feedback</h4>
+                        <small>Todos os campos são obrigatórios</small>
+                    </div>
+                    <div class="card-body p-4">
+                        <form asp-action="EnviarFeedback" asp-controller="Home" method="post">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Nota</label>
+                                <select class="form-select form-select-lg" name="Nota" required>
+                                    <option value="" selected disabled>Escolha sua nota</option>
+                                    <option value="5">★★★★★ Excelente</option>
+                                    <option value="4">★★★★ Muito bom</option>
+                                    <option value="3">★★★ Bom</option>
+                                    <option value="2">★★ Regular</option>
+                                    <option value="1">★ Ruim</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Comentário</label>
+                                <textarea class="form-control" name="Comentario" rows="5" placeholder="Escreva sua opinião..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 fw-bold">
+                                <i class="bi bi-send-fill me-1"></i>Enviar Feedback
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de feedbacks (mockup) -->
+        <div class="row g-4 justify-content-center animate__animated animate__fadeInUp">
+            <div class="col-md-8">
+                <h4 class="fw-bold mb-3 text-center">Feedbacks Recentes</h4>
+                <div class="card shadow-sm border-0 mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong>Maria S.</strong>
+                            <span class="text-warning fw-bold">★★★★☆</span>
+                        </div>
+                        <p class="mb-0">A escola oferece ótimos professores e infraestrutura moderna!</p>
+                    </div>
+                </div>
+                <div class="card shadow-sm border-0 mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong>João P.</strong>
+                            <span class="text-warning fw-bold">★★★★★</span>
+                        </div>
+                        <p class="mb-0">Adorei a atenção dos professores e a organização da escola.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

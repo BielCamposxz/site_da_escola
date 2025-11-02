@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Sobre a Escola";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <!-- Header da página -->
+    <div class="text-center mb-5 animate__animated animate__fadeInDown">
+        <h1 class="display-4 fw-bold text-primary">Escola Claudinor Ribeiro</h1>
+        <p class="lead text-muted">Formando cidadãos com conhecimento, ética e cidadania.</p>
+    </div>
+
+    <!-- Seções informativas com ícones -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 animate__animated animate__fadeInLeft">
+            <div class="card shadow-lg border-0 h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-book-half text-primary fs-1 me-3"></i>
+                    <h3 class="fw-bold mb-0">Nossa História</h3>
+                </div>
+                <p>A Escola Claudinor Ribeiro possui mais de 20 anos de tradição, oferecendo educação de qualidade e um ambiente acolhedor que estimula o desenvolvimento acadêmico e social dos alunos.</p>
+            </div>
+        </div>
+        <div class="col-md-6 animate__animated animate__fadeInRight">
+            <div class="card shadow-lg border-0 h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-bullseye text-success fs-1 me-3"></i>
+                    <h3 class="fw-bold mb-0">Missão e Valores</h3>
+                </div>
+                <p>Nossa missão é educar de forma integral, promovendo valores como respeito, responsabilidade e solidariedade, preparando alunos para o futuro e para a vida em sociedade.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de diferenciais -->
+    <div class="text-center mb-5 animate__animated animate__fadeInUp">
+        <h2 class="fw-bold mb-4 text-primary">Diferenciais da Escola</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 text-center p-3 hover-scale">
+                    <i class="bi bi-easel text-warning fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Metodologia Ativa</h5>
+                    <p class="text-muted">Aprendizado dinâmico, participativo e voltado para o desenvolvimento completo do aluno.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 text-center p-3 hover-scale">
+                    <i class="bi bi-people text-info fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Equipe Qualificada</h5>
+                    <p class="text-muted">Professores capacitados e dedicados a apoiar o crescimento acadêmico e pessoal dos alunos.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 text-center p-3 hover-scale">
+                    <i class="bi bi-building text-primary fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Infraestrutura Completa</h5>
+                    <p class="text-muted">Laboratórios, biblioteca, auditório e espaços planejados para aprendizagem e convivência.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de Feedback / Chamada para login -->
+    <div class="text-center my-5 animate__animated animate__fadeInUp p-4 bg-light rounded-4 shadow-sm">
+        <h3 class="fw-bold mb-3 text-primary">Quer nos dar seu feedback?</h3>
+        <p class="text-muted mb-4">Sua opinião é essencial! Para enviar sugestões ou comentários, você precisa estar logado.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a asp-action="Login" asp-controller="Home" class="btn btn-outline-primary btn-lg fw-bold">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+            </a>
+            <a asp-action="Cadrastro" asp-controller="Home" class="btn btn-primary btn-lg fw-bold">
+                <i class="bi bi-person-plus-fill me-2"></i>Cadastrar
+            </a>
+        </div>
+    </div>
+
+    <!-- Galeria de imagens da escola -->
+    <div class="row g-4 mt-5 animate__animated animate__fadeIn">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm hover-scale">
+                <img src="https://images.unsplash.com/photo-1603706580936-6a6b0d77dbfc?auto=format&fit=crop&w=800&q=60" class="img-fluid rounded" alt="Laboratórios">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm hover-scale">
+                <img src="https://images.unsplash.com/photo-1581092580492-41c76d9cf0be?auto=format&fit=crop&w=800&q=60" class="img-fluid rounded" alt="Biblioteca">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm hover-scale">
+                <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=800&q=60" class="img-fluid rounded" alt="Auditório">
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-scale {
+        transition: transform 0.3s ease;
+    }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+</style>

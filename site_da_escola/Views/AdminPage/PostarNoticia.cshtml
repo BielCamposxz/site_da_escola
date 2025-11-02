@@ -1,0 +1,32 @@
+﻿@model site_da_escola.Models.NoticiasModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Postar uma Notícia";
+}
+
+
+<h2 class="fw-bold text-primary text-center mb-4">@ViewData["Title"]</h2>
+
+<div class="card-form mx-auto col-md-8 animate__animated animate__fadeInUp">
+    <form asp-action="CriarNoticia" asp-controller="AdminPage" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Título da Notícia</label>
+            <input type="text" class="form-control" asp-for="Titulo" placeholder="Ex: Alunos vencem olimpíada de matemática" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Descrição</label>
+            <textarea class="form-control" asp-for="Descricao" rows="4" placeholder="Escreva aqui o conteúdo da notícia..." required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Imagem da Notícia</label>
+            <input type="file" class="form-control" name="arquivo" accept="image/*" capture="environment" required />
+            <small class="text-muted">Você pode tirar uma foto ou escolher da galeria.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-3">
+            <i class="bi bi-upload me-2"></i>Publicar Notícia
+        </button>
+    </form>
+</div>
