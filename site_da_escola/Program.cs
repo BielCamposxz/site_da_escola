@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using site_da_escola.Data;
+using site_da_escola.Helper;
 using site_da_escola.Repositorio;
+using site_da_escola.Repositorio.Fixados;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,17 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IPostarEvento, PostarEvento>();
 builder.Services.AddScoped<IPostarNoticia, PostarNoticia>();
 builder.Services.AddScoped<IUsuario, Usuario>();
+builder.Services.AddScoped<IFeedback, Feedback>();
+builder.Services.AddScoped<IFixadosEventos, FixadosEventos>();
+builder.Services.AddScoped<IFixadosNoticias, FixadosNoticias>();
+builder.Services.AddScoped<ISessao, Sessao>();
+
+// essa e a contfiguracao os cookies na sessao
+builder.Services.AddSession(o =>
+{
+    o.Cookie.HttpOnly = true;
+    o.Cookie.IsEssential = true;
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -31,6 +44,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();

@@ -17,6 +17,32 @@ console.log("%cEmail: %cgabrielfigueira88@email.com", "font-weight:bold; color:#
         }
     });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const stars = document.querySelectorAll(".stars i");
+    const inputNota = document.getElementById("notaSelecionada");
+
+    stars.forEach(star => {
+        star.addEventListener("click", () => {
+            const value = star.getAttribute("data-value");
+            inputNota.value = value; 
+
+            // Atualiza visualmente
+            stars.forEach(s => {
+                if (parseInt(s.getAttribute("data-value")) <= value) {
+                    s.classList.add("text-warning");
+                    s.classList.remove("bi-star");
+                    s.classList.add("bi-star-fill");
+                } else {
+                    s.classList.remove("text-warning");
+                    s.classList.remove("bi-star-fill");
+                    s.classList.add("bi-star");
+                }
+            });
+        });
+    });
+});
+
+
 
 $('.btn-close').click(function () {
     $(".toast-shor").hide();

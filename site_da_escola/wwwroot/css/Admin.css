@@ -138,3 +138,8 @@ footer {
 .animate__animated {
     animation-duration: 0.8s;
 }
+
+.field-validation-error {
+    margin-left: 5px;
+    color: red;
+}

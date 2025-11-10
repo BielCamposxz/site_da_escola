@@ -27,9 +27,8 @@
         </nav>
     </header>
 
-    <div class="d-flex">
-        <!-- 🔹 SIDEBAR -->
-        <aside class="sidebar d-flex flex-column">
+    <div class="d-flex" >
+        <aside class="sidebar d-flex flex-column" style="z-index: 10000;">
             <a asp-controller="AdminPage" asp-action="Index">
                 <i class="bi bi-speedometer2 me-2"></i> Dashboard
             </a>
@@ -39,19 +38,22 @@
             <a asp-controller="AdminPage" asp-action="PostarEventos">
                 <i class="bi bi-calendar-event me-2"></i> Postar Evento
             </a>
+            <a asp-controller="AdminPage" asp-action="Usuarios">
+                <i class="bi bi-people me-2"></i> Gerenciar Usuários
+            </a>
             <a asp-controller="Home" asp-action="Index">
                 <i class="bi bi-house-door me-2"></i> Voltar ao Site
             </a>
         </aside>
 
+
     </div>
-        <!-- 🔹 CONTEÚDO -->
         <main class="container">
             @RenderBody()
         </main>
 
     <footer class="text-center py-3 text-muted border-top">
-        &copy; 2025 - site_da_escola | Painel Administrativo
+        Developed by gabriel | Painel Administrativo
     </footer>
 
 

@@ -1,58 +1,119 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using site_da_escola.Data;
+using site_da_escola.Helper;
 using site_da_escola.Models;
 using site_da_escola.Repositorio;
+using site_da_escola.Repositorio.Fixados;
+using System.Diagnostics;
 
 namespace site_da_escola.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IUsuario _usuario;
+        private readonly ISessao _sessao;
+        private readonly IFixadosEventos _fixadosRepositorio;
+        private readonly BancoContext _bancoContext;
 
-        public HomeController(IUsuario usuario)
+        public HomeController(IUsuario usuario, ISessao sessao, IFixadosEventos fixadosRepositorio, BancoContext bancoContext)
         {
-                _usuario = usuario;
+            _usuario = usuario;
+            _sessao = sessao;
+            _fixadosRepositorio = fixadosRepositorio;
+            _bancoContext = bancoContext;
         }
+
         public IActionResult RegistrarUsuario(UsuariosModel usuario)
         {
+            _sessao.CriarSessaoDoUsuario(usuario);
             _usuario.Registrar(usuario);
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Login()
+        public IActionResult Login() => View();
+
+        public IActionResult Cadrastro() => View();
+
+        public IActionResult DesfixarFixado(int id)
         {
-            return View();
-        }
-        public IActionResult Cadrastro()
-        {
-            return View();
+            FixadosModel fixado = _bancoContext.Fixados.FirstOrDefault(fix => fix.Id == id);
+            _bancoContext.Fixados.Remove(fixado);
+            _bancoContext.SaveChanges();
+            return RedirectToAction("Index"); 
         }
 
         [HttpPost]
-        public IActionResult Login(UsuariosModel usuario)
+        public IActionResult Login(UsuarioSemNomeModel usuario)
         {
-            UsuariosModel UsuarioRetornado = _usuario.BuscarUsuarioPorEmail(usuario);
-            if (UsuarioRetornado != null)
+            try
             {
-                if (UsuarioRetornado.ValidarSenha(usuario.Senha))
+                if(ModelState.IsValid)
                 {
-                    return RedirectToAction("Index", "AdminPage");
-                }
-              
-                    
-                    TempData["MensagemErro"] = "Senha inválida";
+                    UsuariosModel UsuarioRetornado = _usuario.BuscarUsuarioPorEmail(usuario.Email);
+
+                    if (UsuarioRetornado != null)
+                    {
+                        if (UsuarioRetornado.ValidarSenha(usuario.Senha) && UsuarioRetornado.IsAdmin)
+                        {
+                            _sessao.CriarSessaoDoUsuario(UsuarioRetornado);
+                            return RedirectToAction("Index", "AdminPage");
+                        }
+
+                        if (UsuarioRetornado.ValidarSenha(usuario.Senha))
+                        {
+                            _sessao.CriarSessaoDoUsuario(UsuarioRetornado);
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                        TempData["MensagemErro"] = "Senha inválida";
+                        return View(usuario);
+                    }
+
+                    TempData["MensagemErro"] = "Usuário e/ou senha inválidos";
                     return View(usuario);
-
+                }
+                return View(usuario);
             }
-            TempData["MensagemErro"] = "Usuário e/ou senha inválidos";
-
-            return View(usuario);
+            catch (Exception err)
+            {
+                TempData["MensagemErro"] = $"Ops, algo deu errado {err}";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public IActionResult Index()
         {
-            return View();
+            UsuariosModel usuario = _sessao.BuscarSessaoDoUsuario();
+
+            var fixados = _fixadosRepositorio.GetTodosFixados();
+
+            var model = new FixadosUsuarioModel
+            {
+                usuario = usuario,
+                FixadosTotal = fixados
+            };
+
+            int total = _bancoContext.Fixados.Count();
+
+            if(total > 3)
+            {
+                var eventoMaisAntigo = _bancoContext.Fixados
+                    .OrderBy(e => e.Id)
+                    .FirstOrDefault();
+                _bancoContext.Fixados.Remove(eventoMaisAntigo);
+                _bancoContext.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model);
         }
+
+        public IActionResult Sair()
+        {
+            _sessao.ApagarSessaoUsuario();
+            return RedirectToAction("Index", "Home");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

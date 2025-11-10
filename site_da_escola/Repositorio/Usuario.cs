@@ -40,9 +40,9 @@ namespace site_da_escola.Repositorio
             }
         }
 
-        public UsuariosModel BuscarUsuarioPorEmail(UsuariosModel usuarioModel)
+        public UsuariosModel BuscarUsuarioPorEmail(string email)
         {
-            var usuario = _bancoContext.Usuarios.FirstOrDefault(user => user.Email == usuarioModel.Email);
+            var usuario = _bancoContext.Usuarios.FirstOrDefault(user => user.Email == email);
             if (usuario != null)
             {
                 return usuario;
@@ -53,6 +53,47 @@ namespace site_da_escola.Repositorio
         public int GetTotalUsuarios()
         {
             return _bancoContext.Usuarios.Count(); 
+        }
+
+        public List<UsuariosModel> BuscarTodosUsuario()
+        {
+            return _bancoContext.Usuarios.ToList();
+        }
+
+        public bool ApagarUsuario(int id)
+        {
+            UsuariosModel usuario = BuscarUsuarioPorId(id);
+
+            if(usuario == null)
+            {
+                return false;
+            }
+            else
+            {
+                _bancoContext.Usuarios.Remove(usuario);
+                _bancoContext.SaveChanges();
+                return true;
+            }
+        }
+
+        public UsuariosModel BuscarUsuarioPorId(int id)
+        {
+            return _bancoContext.Usuarios.FirstOrDefault(user => user.Id == id);
+        }
+
+        public UsuariosModel Editar(UsuariosModel usuario)
+        {
+           UsuariosModel usuarioDb = BuscarUsuarioPorId(usuario.Id);
+            if(usuarioDb == null) 
+            {
+                return null;
+            }
+            usuarioDb.Nome = usuario.Nome;
+            usuarioDb.Email = usuario.Email;
+            usuarioDb.Senha = usuario.Senha;
+            _bancoContext.Usuarios.Update(usuarioDb);
+            _bancoContext.SaveChanges();
+            return usuarioDb;
         }
     }
 }

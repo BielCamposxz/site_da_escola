@@ -13,6 +13,9 @@ namespace site_da_escola.Data
         public DbSet<NoticiasModel> Noticias { get; set; }
         public DbSet<EventosModel> Eventos { get; set; }
         public DbSet<UsuariosModel> Usuarios { get; set; }
+        public DbSet<FeedbackModel> Feedbacks { get; set; }
+        public DbSet<FixadosTemprariamenteModel> FixadosTemprariamente { get; set; }
+        public DbSet<FixadosModel> Fixados { get; set; }
 
     }
 }

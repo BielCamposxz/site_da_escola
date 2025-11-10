@@ -1,4 +1,4 @@
-﻿    using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using site_da_escola.Data;
 using site_da_escola.Models;
 using site_da_escola.Repositorio;
@@ -62,14 +62,82 @@ namespace site_da_escola.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public IActionResult ApagarUsuario(UsuariosModel id)
+        {
+            try
+            {
+                if(_usuario.ApagarUsuario(id.Id))
+                {
+                    TempData["MensagemSucesso"] = "Usuário apagado com sucesso";
+                }
+                else
+                {
+                    TempData["MessagenErro"] = "Ops, Algo deu errado";
+                }
+                return RedirectToAction("Usuarios");
+            }
+            catch (Exception err)
+            {
+                TempData["MessagenErro"] = $"Ops, algo deu errado: {err.Message}";
+                return RedirectToAction("Usuarios");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult EditarUsuario(UsuariosModel usuario)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    UsuariosModel usuarioIsTrue = _usuario.BuscarUsuarioPorId(usuario.Id);
+                    if(usuarioIsTrue == null)
+                    {
+                        TempData["MensagenErro"] = "O usuario nao existe";
+                        return RedirectToAction("Usuarios");
+                    }
+
+                    _usuario.Editar(usuario);
+                    return RedirectToAction("Usuarios");
+
+                }
+
+                return View("Usuarios", usuario);
+            }
+            catch (Exception err)
+            {
+                TempData["MessagenErro"] = $"Ops, algo deu errado: {err.Message}" ;
+                return RedirectToAction("Usuarios");
+            }
+        }
+
+        public List<UsuariosModel> BuscarTodosUsuario()
+        {
+            return _usuario.BuscarTodosUsuario();
+        }
+
         public IActionResult PostarEventos()
         {
             return View();
         }
 
+        public IActionResult EditarUsuario(int id)
+        {
+            UsuariosModel usuario = _usuario.BuscarUsuarioPorId(id);
+            return View(usuario);
+        }
+
+        public IActionResult ApagarUsuario(int id)
+        {
+            UsuariosModel usuario = _usuario.BuscarUsuarioPorId(id);
+            return View(usuario);
+        }
+
         public IActionResult Usuarios()
         {
-            return View();
+            List<UsuariosModel> usuarios = BuscarTodosUsuario();
+            return View(usuarios);
         }
 
         public IActionResult PostarNoticia()

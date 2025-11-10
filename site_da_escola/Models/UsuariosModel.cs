@@ -1,10 +1,19 @@
-﻿namespace site_da_escola.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace site_da_escola.Models
 {
     public class UsuariosModel
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Esse campo nao pode esta vazio")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Esse campo nao pode esta vazio")]
+        [EmailAddress(ErrorMessage = "Digite um email valido")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Esse campo nao pode esta vazio")]
         public string Senha { get; set; }
         public bool IsAdmin { get; set; }
 

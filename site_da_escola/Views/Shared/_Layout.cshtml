@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using site_da_escola.Helper
+@inject ISessao _sessao
+
+@{
+    var usuario = _sessao.BuscarSessaoDoUsuario();
+}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -46,43 +53,79 @@
         </div>
     }
 
-    <header>
-        <!-- Hero Section compacta -->
-        <div class="text-center text-white position-relative" style="height:250px; background: url('https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;">
-            <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0.4);"></div>
-            <div class="d-flex flex-column justify-content-center align-items-center h-100">
-                <h1 class="fw-bold display-5 animate__animated animate__fadeInDown">Escola Claudinor Ribeiro</h1>
-                <p class="lead mb-2 animate__animated animate__fadeInUp">As novidades da nossa comunidade escolar</p>
-                
+    <header class="position-relative">
+        <div class="hero-header d-flex flex-column justify-content-center align-items-center text-center text-white">
+            <div class="hero-overlay"></div>
+            <div class="hero-content position-relative">
+                <h1 class="fw-bold display-5 mb-2 animate__animated animate__fadeInDown">
+                    Escola Claudinor Ribeiro
+                </h1>
+                <p class="lead mb-0 animate__animated animate__fadeInUp">
+                    As novidades da nossa comunidade escolar
+                </p>
             </div>
         </div>
 
-        <!-- Navbar compacta -->
-        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: #0d6efd;">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav">
+        <nav class="navbar navbar-expand bg-primary-gradient shadow-sm py-3">
+            <div class="container d-flex justify-content-between align-items-center flex-wrap">
+
+                <div class="navbar-collapse d-flex justify-content-center">
+                    <ul class="navbar-nav d-flex flex-row gap-4 mb-0">
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-semibold" asp-action="Index" asp-controller="Home">Início</a>
+                            <a class="nav-link text-white fw-semibold hover-underline" asp-action="Index" asp-controller="Home">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-semibold" asp-action="Index" asp-controller="Eventos">Eventos</a>
+                            <a class="nav-link text-white fw-semibold hover-underline" asp-action="Index" asp-controller="Eventos">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-semibold" asp-action="Index" asp-controller="Noticias">Notícias</a>
+                            <a class="nav-link text-white fw-semibold hover-underline" asp-action="Index" asp-controller="Noticias">Notícias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-semibold" asp-action="Index" asp-controller="Sobre">Sobre a Escola</a>
+                            <a class="nav-link text-white fw-semibold hover-underline" asp-action="Index" asp-controller="Sobre">Sobre a Escola</a>
                         </li>
                     </ul>
                 </div>
+
+                
+                
+
+                @if(usuario != null && usuario.IsAdmin == true)
+                {
+                    <div class="d-flex">
+                        <form asp-controller="Home" asp-action="Sair" method="post" class="mb-0">
+                            <button type="submit" class="btn btn-light text-primary fw-semibold px-3 py-1 rounded-pill">
+                                <i class="bi bi-box-arrow-right me-1"></i> Sair
+                            </button>
+                        </form>
+                    </div>
+
+                    <a asp-action="Index" asp-controller="AdminPage" class="admin-btn" title="Ir para o Admin">
+                        <i class="bi bi-speedometer2"></i>
+                    </a>
+                }
+
+                @if(usuario != null && usuario.IsAdmin == false)
+                {
+                    <div class="d-flex">
+                        <form asp-controller="Home" asp-action="Sair" method="post" class="mb-0">
+                            <button type="submit" class="btn btn-light text-primary fw-semibold px-3 py-1 rounded-pill">
+                                <i class="bi bi-box-arrow-right me-1"></i> Sair
+                            </button>
+                        </form>
+                    </div>
+
+      
+                }
+
+                
+
             </div>
         </nav>
+
     </header>
+
+ 
+
 
 
     <div class="container my-5 animate__animated animate__fadeInUp">
@@ -91,21 +134,19 @@
         </main>
     </div>
 
-    <footer class="footer mt-auto py-4 text-white text-center bg-primary bottom-0 w-100 shadow-lg animate__animated animate__fadeInUp">
+    <footer class="bg-primary text-white text-center py-5 shadow-lg">
         <div class="container">
-            <h5 class="fw-bold mb-2 animate__fadeInDown">Escola CLAUDINOR RIBEIRO</h5>
-            <p class="mb-1">
-                Endereço da escola | Telefone: (00) 0000-0000<br>
-                <a href="mailto:contato@claudinorribeiro.edu.br" class="text-white text-decoration-none link-light">
-                    contato@claudinorribeiro.edu.br
-                </a>
+            <h4 class="fw-bold mb-3">Entre em Contato</h4>
+            <p class="mb-1"><i class="bi bi-telephone-fill me-2"></i>Telefone: (28) 3522-0395</p>
+            <p class="mb-3">
+                <i class="bi bi-envelope-fill me-2"></i>
+                <a href="mailto:contato@profclaudinorribeiro.edu.br" class="text-white text-decoration-none">contato@profclaudinorribeiro.edu.br</a>
             </p>
-            <div class="mt-3">
-                <a href="#" class="text-white fs-5 me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white fs-5 me-3"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-white fs-5 me-3"><i class="bi bi-envelope-fill"></i></a>
+            <div class="d-flex justify-content-center gap-4 fs-4 mb-3">
+                <a href="https://www.instagram.com/profclaudionorribeiro/?igsh=dTM4aWNsdTlqdGV0#" target="_blank" class="text-white"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/SeduES/photos/escola-estadual-claudionor-ribeiro/1686944688005623/" target="_blank" class="text-white"><i class="bi bi-facebook"></i></a>
             </div>
-            <small class="d-block mt-3">&copy; 2025 Escola CLAUDINOR RIBEIRO. Todos os direitos reservados.</small>
+            <small class="d-block">&copy; 2025 E.E.E.F.M. Prof. Claudionor Ribeiro — Todos os direitos reservados.</small>
         </div>
     </footer>
 

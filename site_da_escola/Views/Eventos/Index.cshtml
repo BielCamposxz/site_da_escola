@@ -1,4 +1,4 @@
-﻿@model IEnumerable<site_da_escola.Models.EventosModel>
+﻿@model EventoUsuarioModel
 
 @{
     ViewData["Title"] = "Eventos";
@@ -14,17 +14,37 @@
     </div>
 
     <div class="row g-4">
-        @foreach (var evento in Model)
+        @foreach (var evento in Model.TotalEventos)
         {
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="@Url.Action("Imagem", "Eventos", new { id = evento.Id })"
-                         class="card-img-top rounded-top"
-                         alt="@evento.Titulo"
-                         style="height: 220px; object-fit: cover;" />
+            <div class="col-md-4 position-relative">
+                <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden">
+
+                    @if (Model.usuario != null && Model.usuario.IsAdmin)
+                    {
+                        <form asp-controller="Eventos" asp-action="CriarFixado" method="post" class="fixar-form">
+                            <input type="hidden" name="id" value="@evento.Id" />
+                            <button type="submit" class="btn-fixar" title="Fixar evento">
+                                <i class="bi bi-pin-angle-fill"></i>
+                            </button>
+                        </form>
+
+                        <form asp-controller="Eventos" asp-action="Excluir" method="post" class="excluir-form">
+                            <input type="hidden" name="id" value="@evento.Id" />
+                            <button type="submit" class="btn-excluir" title="Excluir notícia">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </form>
+                    } 
+
+                    <div class="position-relative">
+                        <img src="@Url.Action("Imagem", "Eventos", new { id = evento.Id })"
+                             class="card-img-top rounded-top"
+                             alt="@evento.Titulo"
+                             style="height: 220px; object-fit: cover;" />
+                    </div>
 
                     <div class="card-body">
-                        <h5 class="card-title text-primary">@evento.Titulo</h5>
+                        <h5 class="card-title text-primary fw-semibold">@evento.Titulo</h5>
                         <p class="card-text text-muted">@evento.Descricao</p>
                     </div>
 
@@ -35,6 +55,7 @@
                     </div>
                 </div>
             </div>
+
         }
     </div>
 </main>

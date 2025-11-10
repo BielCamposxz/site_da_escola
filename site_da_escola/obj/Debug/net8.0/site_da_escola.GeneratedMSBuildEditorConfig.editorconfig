@@ -28,6 +28,14 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/figue/Meus projetos/site_da_escola/site_da_escola/Views/AdminPage/ApagarUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYWdlXEFwYWdhclVzdWFyaW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/figue/Meus projetos/site_da_escola/site_da_escola/Views/AdminPage/EditarUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYWdlXEVkaXRhclVzdWFyaW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/figue/Meus projetos/site_da_escola/site_da_escola/Views/AdminPage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYWdlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -95,3 +103,7 @@ build_metadata.AdditionalFiles.CssScope = b-zk84rfqlwk
 [C:/Users/figue/Meus projetos/site_da_escola/site_da_escola/Views/Shared/_LayoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-5fw46yrgt8
+
+[C:/Users/figue/Meus projetos/site_da_escola/site_da_escola/Views/Shared/_LayoutUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRVc3VhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = b-furdldaqqp
