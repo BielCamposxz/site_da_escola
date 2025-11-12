@@ -25,14 +25,13 @@ namespace site_da_escola.Controllers
             _sessao = sessao;
         }
 
-        [PaginaRestritaParaAdmin]
         public IActionResult Excluir(int id)
         {
             NoticiasModel noticias = _Context.Noticias.FirstOrDefault(ev => ev.Id == id);
             _Context.Noticias.Remove(noticias);
 
 
-            FixadosModel fixadosId = _Context.Fixados.FirstOrDefault(ev => ev.Id_Estrangeiro == id && ev.Tipo == "Noticia");
+            FixadosModel fixadosId = _Context.Fixados.FirstOrDefault(ev => ev.Id_Estrangeiro == noticias.Id && ev.Tipo == "Noticia");
             if (fixadosId != null)
             {
                 _Context.Fixados.Remove(fixadosId);

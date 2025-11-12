@@ -20,12 +20,13 @@ namespace site_da_escola.filter
 
             var usuario = JsonConvert.DeserializeObject<UsuariosModel>(sessaoUsuario);
 
-            if (usuario == null || usuario.IsAdmin == true)
+            if (usuario == null || usuario.IsAdmin != true)
             {
                 context.Result = new RedirectToRouteResult(
                     new RouteValueDictionary { { "Controller", "Home" }, { "Action", "Index" } });
                 return;
             }
+
         }
     }
 }

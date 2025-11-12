@@ -1,3 +1,13 @@
+wwwroot\assets\Imagem1.png
+wwwroot\assets\Imagem10.png
+wwwroot\assets\Imagem2.png
+wwwroot\assets\Imagem3.png
+wwwroot\assets\Imagem4.png
+wwwroot\assets\Imagem5.png
+wwwroot\assets\Imagem6.png
+wwwroot\assets\Imagem7.png
+wwwroot\assets\Imagem8.png
+wwwroot\assets\Imagem9.png
 wwwroot\css\Admin.css
 wwwroot\css\site.css
 wwwroot\favicon.ico

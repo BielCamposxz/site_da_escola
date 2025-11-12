@@ -56,12 +56,6 @@ namespace site_da_escola.Controllers
 
                     if (UsuarioRetornado != null)
                     {
-                        if (UsuarioRetornado.ValidarSenha(usuario.Senha) && UsuarioRetornado.IsAdmin)
-                        {
-                            _sessao.CriarSessaoDoUsuario(UsuarioRetornado);
-                            return RedirectToAction("Index", "AdminPage");
-                        }
-
                         if (UsuarioRetornado.ValidarSenha(usuario.Senha))
                         {
                             _sessao.CriarSessaoDoUsuario(UsuarioRetornado);
