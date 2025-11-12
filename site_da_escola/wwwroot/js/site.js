@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const value = star.getAttribute("data-value");
             inputNota.value = value; 
 
-            // Atualiza visualmente
             stars.forEach(s => {
                 if (parseInt(s.getAttribute("data-value")) <= value) {
                     s.classList.add("text-warning");

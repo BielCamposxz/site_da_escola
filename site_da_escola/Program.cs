@@ -21,7 +21,6 @@ builder.Services.AddScoped<IFixadosEventos, FixadosEventos>();
 builder.Services.AddScoped<IFixadosNoticias, FixadosNoticias>();
 builder.Services.AddScoped<ISessao, Sessao>();
 
-// essa e a contfiguracao os cookies na sessao
 builder.Services.AddSession(o =>
 {
     o.Cookie.HttpOnly = true;

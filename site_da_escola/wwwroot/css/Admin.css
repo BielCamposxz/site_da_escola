@@ -38,7 +38,7 @@ body {
     padding-top: 1rem;
     position: fixed;
     width: 250px;
-    top: 56px; /* abaixo do header */
+    top: 56px; 
 }
 
     .sidebar a {
@@ -55,7 +55,6 @@ body {
             z-index:1000;
         }
 
-/* Header */
 .header {
     position: fixed;
     top: 0;
@@ -99,7 +98,6 @@ footer {
 }
 
 
-/* Card style */
 .card-form {
     background: #fff;
     border: none;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using site_da_escola.Data;
+using site_da_escola.filter;
 using site_da_escola.Helper;
 using site_da_escola.Migrations;
 using site_da_escola.Models;
@@ -24,7 +25,7 @@ namespace site_da_escola.Controllers
             _sessao = sessao;
         }
 
-
+        [PaginaRestritaParaAdmin]
         public IActionResult Excluir(int id)
         {
             NoticiasModel noticias = _Context.Noticias.FirstOrDefault(ev => ev.Id == id);
@@ -55,6 +56,7 @@ namespace site_da_escola.Controllers
             return View(model);
         }
 
+        [PaginaRestritaParaAdmin]
         public IActionResult CriarFixado(int id)
         {
             FixadosModel fixadosId = _Context.Fixados.FirstOrDefault(ev => ev.Id_Estrangeiro == id && ev.Tipo == "Noticias");

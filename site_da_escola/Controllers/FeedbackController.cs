@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using site_da_escola.filter;
 using site_da_escola.Helper;
 using site_da_escola.Models;
 using site_da_escola.Repositorio;
@@ -17,6 +18,7 @@ namespace site_da_escola.Controllers
         }
 
         [HttpPost]
+        [PaginaRestritaParaUserNaoLogado]
         public IActionResult Enviar(FeedbackUsuarioModel model)
         {
             var usuario = _sessao.BuscarSessaoDoUsuario();

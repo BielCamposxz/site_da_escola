@@ -84,7 +84,7 @@
                 {
                     foreach (var item in Model.listaFeedbacks)
                     {
-                        <div class="feedback-card-mini shadow-lg rounded-4 p-4 bg-white">
+                        <div class="feedback-card-mini shadow-lg rounded-4 p-4 bg-white" style="border-radius:10px;">
                             <div class="d-flex align-items-center mb-3">
 
 
@@ -92,7 +92,7 @@
                                     <span class="avatar-inicial">
                                         @item.Nome.Substring(0, 1).ToUpper()
                                     </span>
-                                </div>
+                                </div> 
 
                                 <div class="text-start">
                                     <strong class="fs-5">@item.Nome</strong>
@@ -164,12 +164,10 @@
         min-height: 20px;
     }
 
-    /* Fundo geral */
     .feedback-section {
         background: linear-gradient(180deg, #f9fbff 0%, #eef3ff 100%);
     }
 
-    /* ==== Título com gradiente ==== */
     .text-gradient {
         background: linear-gradient(90deg, #0d6efd, #00b4d8);
         -webkit-background-clip: text;
@@ -269,25 +267,23 @@
     }
 
     .avatar-circle {
-        width: 60px;
-        height: 60px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
+        background-color: #e0e0e0; 
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: #fff;
-        background: linear-gradient(135deg, #0d6efd, #00b4d8);
+        color: #333;
+        font-weight: 400; 
+        font-size: 20px;
         text-transform: uppercase;
-        flex-shrink: 0;
-        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
     .avatar-inicial {
-        user-select: none;
-    }
-
+        font-family: "Segoe UI", sans-serif;
+        font-weight: 300; 
 </style>
 
 <script>
@@ -322,7 +318,6 @@
         autoScroll();
     });
 
-        // ===== Sistema de estrelas interativo =====
     document.addEventListener("DOMContentLoaded", () => {
         const stars = document.querySelectorAll(".stars i");
         const ratingInput = document.getElementById("notaSelecionada");

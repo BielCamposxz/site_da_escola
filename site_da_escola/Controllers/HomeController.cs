@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using site_da_escola.Data;
+using site_da_escola.filter;
 using site_da_escola.Helper;
 using site_da_escola.Models;
 using site_da_escola.Repositorio;
@@ -23,6 +24,7 @@ namespace site_da_escola.Controllers
             _bancoContext = bancoContext;
         }
 
+        [PaginaRestritaParaAdmin]
         public IActionResult RegistrarUsuario(UsuariosModel usuario)
         {
             _sessao.CriarSessaoDoUsuario(usuario);
@@ -34,6 +36,7 @@ namespace site_da_escola.Controllers
 
         public IActionResult Cadrastro() => View();
 
+        [PaginaRestritaParaAdmin]
         public IActionResult DesfixarFixado(int id)
         {
             FixadosModel fixado = _bancoContext.Fixados.FirstOrDefault(fix => fix.Id == id);
@@ -108,6 +111,7 @@ namespace site_da_escola.Controllers
             return View(model);
         }
 
+        [PaginaRestritaParaUserNaoLogado]
         public IActionResult Sair()
         {
             _sessao.ApagarSessaoUsuario();

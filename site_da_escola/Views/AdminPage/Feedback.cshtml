@@ -1,0 +1,83 @@
+﻿@model List<FeedbackModel>
+@{
+    Layout = "_LayoutUsuario";
+    ViewData["Title"] = "Gerenciamento de Feedback";
+}
+
+<div class="container py-4 animate__animated animate__fadeIn">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <h2 class="fw-bold text-primary mb-0">
+                <i class="bi bi-chat-left-text me-2"></i>Gerenciamento de Feedbacks
+            </h2>
+
+            <a asp-controller="AdminPage" asp-action="Index"
+               class="btn btn-outline-secondary rounded-pill fw-semibold shadow-sm px-3">
+                <i class="bi bi-arrow-left-circle me-1"></i> Voltar
+            </a>
+        </div>
+
+        <span class="badge bg-primary bg-gradient fs-6 px-3 py-2 shadow-sm">
+            Total: @Model.Count
+        </span>
+    </div>
+
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0 table-hover">
+                <thead class="text-white" style="background: linear-gradient(90deg, #4e54c8, #8f94fb);">
+                    <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Estrelas</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col" class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">
+                                <i class="bi bi-emoji-frown fs-4 d-block mb-2"></i>
+                                Nenhum feedback encontrado.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var feedback in Model)
+                        {
+                            <tr class="bg-white">
+                                <th scope="row" class="text-center fw-bold text-secondary">@feedback.Id</th>
+                                <td class="fw-semibold">@feedback.Nome</td>
+                                <td>
+                                    @{
+                                        int estrelas = (int)feedback.estrelas;
+                                    }
+
+                                    @for (int i = 1; i <= estrelas; i++)
+                                    {
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    }
+
+                                    @for (int i = estrelas + 1; i <= 5; i++)
+                                    {
+                                        <i class="bi bi-star text-muted"></i>
+                                    }
+                                </td>
+                                <td class="text-secondary">@feedback.descricao</td>
+                                <td class="text-center">
+                                    <a asp-route-id="@feedback.Id" asp-controller="AdminPage" asp-action="Apagarfeedback"
+                                       class="btn btn-sm btn-outline-danger rounded-pill px-3 shadow-sm fw-semibold">
+                                        <i class="bi bi-trash3-fill me-1"></i>Excluir
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
