@@ -1,0 +1,59 @@
+﻿@model NoticiaUsuarioModel
+@{
+    ViewData["Title"] = "Notícias";
+    Layout = "_Layout";
+}
+
+<main class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Notícias da Escola</h2>
+        <p class="text-muted fs-5">
+            Acompanhe as últimas novidades, conquistas e atividades realizadas pela nossa comunidade escolar.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var noticia in Model.NoticiasTotal)
+        {
+            <div class="col-md-4 position-relative">
+                <div class="card border-0 shadow-sm h-100">
+
+                    @if(Model.usuario != null && Model.usuario.IsAdmin)
+                    {
+                        <form asp-controller="Noticias" asp-action="CriarFixado" method="post" class="fixar-form">
+                            <input type="hidden" name="id" value="@noticia.Id" />
+                            <button type="submit" class="btn-fixar" title="Fixar notícia">
+                                <i class="bi bi-pin-angle-fill"></i>
+                            </button>
+                        </form>
+
+                        <form asp-controller="Noticias" asp-action="Excluir" method="post" class="excluir-form">
+                            <input type="hidden" name="id" value="@noticia.Id" />
+                            <input type="hidden" name="id" />
+                            <button type="submit" class="btn-excluir" title="Excluir notícia">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </form>
+                    }
+
+                    <img src="@Url.Action("Imagem", "Noticias", new { id = noticia.Id })"
+                         class="card-img-top rounded-top"
+                         alt="@noticia.Titulo"
+                         style="height: 220px; object-fit: cover;" />
+
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">@noticia.Titulo</h5>
+                        <p class="card-text text-muted">@noticia.Descricao</p>
+                    </div>
+
+                    <div class="card-footer bg-white border-0 text-end">
+                        <small class="text-muted">
+                            Publicado em: @noticia.DataDePostagem.ToString("dd/MM/yyyy")
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</main>

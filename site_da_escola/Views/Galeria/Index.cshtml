@@ -1,0 +1,107 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Galeria de Fotos";
+}
+
+<div class="container py-5">
+    <h1 class="text-center mb-4">Galeria de Fotos</h1>
+
+    
+
+    <div class="row g-4">
+        
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <video class="video-galeria" controls>
+                <source src="~/assets/lv_0_20251114164309.mp4" type="video/mp4" />
+            </video>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <video class="video-galeria" controls>
+                <source src="~/assets/lv_0_20251114164530.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 test">
+            <div class="card shadow-sm">
+                <img src="~/assets/Imagem1.png" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 test">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagemalunos.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+  
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagembarro.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagemDire.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagemjogo.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagemLab.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagemlider.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagemracismo.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="~/assets/imagemracismo2.jpg" class="card-img-top galeria-img" alt="Foto 1">
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+<style>
+
+    .video-galeria {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+    }
+    .galeria-img {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: fill !important;
+    }
+
+
+    .card {
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+</style>

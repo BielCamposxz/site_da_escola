@@ -1,0 +1,333 @@
+﻿@model FeedbackUsuarioModel
+@{
+    ViewData["Title"] = "Feedback";
+    Layout = "_Layout";
+}
+
+<section class="feedback-section py-5">
+    <div class="container">
+
+        @if (Model.usuario == null)
+        {
+            <div class="alert alert-warning text-center shadow-sm animate__animated animate__fadeInUp">
+                <h5><i class="bi bi-exclamation-triangle-fill me-2"></i>Você precisa estar logado para enviar feedback.</h5>
+                <div class="mt-3">
+                    <a asp-action="Login" asp-controller="Home" class="btn btn-outline-primary fw-bold me-2">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>Entrar
+                    </a>
+                    <a asp-action="Cadastro" asp-controller="Home" class="btn btn-primary fw-bold text-white">
+                        <i class="bi bi-person-plus-fill me-1"></i>Cadastrar
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <!-- TÍTULO -->
+            <div class="text-center mb-5">
+                <h1 class="fw-bold text-gradient display-5 mb-3">Compartilhe sua opinião</h1>
+                <p class="text-muted fs-5">Nos conte o que achou — sua avaliação faz toda a diferença</p>
+            </div>
+
+            <!-- FORMULÁRIO -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-7">
+                    <div class="feedback-card card border-0 shadow-lg p-5 rounded-4 position-relative overflow-hidden">
+                        <div class="decor-circle"></div>
+
+                        <form asp-controller="Feedback" asp-action="Enviar" method="post" class="position-relative">
+
+                            <input type="hidden" asp-for="feedback.Nome" />
+
+                            <div class="text-center mb-4">
+                                <label class="form-label fw-semibold fs-4 mb-3 d-block text-primary">Sua avaliação</label>
+
+                                <div class="rating-container">
+                                    <input type="hidden" id="notaSelecionada" name="feedback.estrelas" />
+
+                                    <div class="stars">
+                                        <i class="bi bi-star" data-value="1"></i>
+                                        <i class="bi bi-star" data-value="2"></i>
+                                        <i class="bi bi-star" data-value="3"></i>
+                                        <i class="bi bi-star" data-value="4"></i>
+                                        <i class="bi bi-star" data-value="5"></i>
+                                    </div>
+
+                                    <div class="rating-hint mt-2 text-muted small"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <textarea name="feedback.descricao" asp-for="feedback.descricao"
+                                          class="form-control feedback-textarea rounded-4"
+                                          rows="4" placeholder="Escreva aqui seu feedback..."></textarea>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-gradient btn-lg px-5 py-3 fw-bold rounded-pill shadow-sm">
+                                    <i class="bi bi-send-fill me-2"></i>Enviar Feedback
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÍTULO FEEDBACKS -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-primary mb-2">O que nossos alunos dizem 💬</h2>
+                <p class="text-muted">Confira as opiniões mais recentes sobre nossa escola.</p>
+            </div>
+
+            <div class="feedback-carousel-wrapper">
+                <div class="feedback-carousel">
+                    @if (Model.listaFeedbacks != null && Model.listaFeedbacks.Any())
+                    {
+                        foreach (var item in Model.listaFeedbacks)
+                        {
+                            <div class="feedback-card-mini shadow-lg rounded-4 p-4 bg-white">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="avatar-circle me-3">
+                                        <span class="avatar-inicial">
+                                            @item.Nome.Substring(0, 1).ToUpper()
+                                        </span>
+                                    </div>
+
+                                    <div class="text-start">
+                                        <strong class="fs-5">@item.Nome</strong>
+                                        <div class="text-warning small">
+                                            @for (int j = 1; j <= 5; j++)
+                                            {
+                                                if (j <= (int)item.estrelas)
+                                                {
+                                                    <i class="bi bi-star-fill"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-star"></i>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="mb-0 text-muted fs-6 fst-italic">
+                                    “@item.descricao”
+                                </p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center text-muted">Nenhum feedback encontrado.</div>
+                    }
+                </div>
+            </div>
+
+        }
+    </div>
+</section>
+
+<style>
+    /* --- SEU CSS RESTAURADO E FUNCIONANDO --- */
+
+    .rating-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stars {
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
+        font-size: 2.5rem;
+        color: #ccc;
+    }
+
+        .stars i.active {
+            color: #ffc107;
+        }
+
+    .feedback-section {
+        background: linear-gradient(180deg, #f9fbff 0%, #eef3ff 100%);
+    }
+
+    .text-gradient {
+        background: linear-gradient(90deg, #0d6efd, #00b4d8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .feedback-card {
+        background: #fff;
+        border-radius: 1.5rem;
+        position: relative;
+    }
+
+    .decor-circle {
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: rgba(13,110,253,0.1);
+    }
+
+    .feedback-textarea {
+        background: #f8f9fa;
+        border: 2px solid transparent;
+    }
+
+    .feedback-card-mini {
+        transition: transform .3s;
+    }
+
+        .feedback-card-mini:hover {
+            transform: translateY(-5px);
+        }
+
+
+    .avatar-circle {
+        width: 48px;
+        height: 48px;
+        background: #e0e0e0;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .avatar-inicial {
+        font-weight: 600;
+    }
+
+    .feedback-carousel-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .feedback-carousel-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .feedback-carousel {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-behavior: auto;
+        padding-bottom: 1rem;
+        touch-action: pan-x !important;
+    }
+
+        /* remove scrollbars */
+        .feedback-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+    .feedback-carousel {
+        scrollbar-width: none;
+    }
+
+    /* evita quebra no iPhone */
+    .feedback-card-mini {
+        flex: 0 0 auto;
+        width: 300px;
+    }
+
+
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const carousel = document.querySelector(".feedback-carousel");
+
+        if (!carousel) return;
+
+        // DUPLICA OS CARDS PARA PERMITIR LOOP INFINITO
+        const clone = carousel.innerHTML;
+        carousel.innerHTML += clone;
+
+        let speed = 0.6;
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+
+        /* DRAG PC */
+        carousel.addEventListener("mousedown", e => {
+            isDragging = true;
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener("mouseup", () => isDragging = false);
+        carousel.addEventListener("mouseleave", () => isDragging = false);
+
+        carousel.addEventListener("mousemove", e => {
+            if (!isDragging) return;
+            const x = e.pageX - carousel.offsetLeft;
+            carousel.scrollLeft = scrollLeft - (x - startX) * 2;
+        });
+
+        /* AUTOSCROLL COMPATÍVEL COM IPHONE */
+        function autoScroll() {
+            if (!isDragging) {
+                carousel.scrollLeft += speed;
+
+                // Quando chegar no fim da primeira metade volta para o início
+                if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+                    carousel.scrollLeft = 0;
+                }
+            }
+
+            requestAnimationFrame(autoScroll);
+        }
+
+        autoScroll();
+    });
+
+
+
+
+    /* SISTEMA DAS ESTRELAS */
+    document.addEventListener("DOMContentLoaded", () => {
+        const stars = document.querySelectorAll(".stars i");
+        const ratingInput = document.getElementById("notaSelecionada");
+        const hint = document.querySelector(".rating-hint");
+
+        const mensagens = ["Péssimo 😞", "Ruim 😕", "Regular 😐", "Bom 🙂", "Excelente 🤩"];
+
+        stars.forEach((star, index) => {
+
+            star.addEventListener("click", () => {
+                ratingInput.value = index + 1;
+                updateStars(index + 1);
+                hint.textContent = mensagens[index];
+            });
+
+            star.addEventListener("mouseover", () => {
+                updateStars(index + 1);
+                hint.textContent = mensagens[index];
+            });
+
+            star.addEventListener("mouseleave", () => {
+                let selected = ratingInput.value;
+                updateStars(selected);
+                hint.textContent = selected ? mensagens[selected - 1] : "";
+            });
+        });
+
+        function updateStars(valor) {
+            stars.forEach((s, i) => {
+                s.classList.toggle("active", i < valor);
+            });
+        }
+    });
+</script>

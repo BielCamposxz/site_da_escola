@@ -1,0 +1,132 @@
+﻿@model FixadosUsuarioModel
+@{ 
+    ViewData["Title"] = "Início - E.E.E.F.M. Prof. Claudionor Ribeiro";
+    Layout = "_Layout";
+}
+
+
+<section class="container py-5 animate__animated animate__fadeInUp">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Destaques Recentes</h2>
+        <p class="text-muted">Confira o que está acontecendo em nossa escola</p>
+    </div>
+
+    <div class="row g-4">
+        @if (Model.FixadosTotal != null)
+        {
+            foreach (var fixado in Model.FixadosTotal)
+        {
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        @if(Model.usuario != null && Model.usuario.IsAdmin)
+                        {
+                            <form asp-controller="Home" asp-action="DesfixarFixado" method="post" class="desfixar-form position-absolute top-0 end-0 m-2">
+                                <input type="hidden" name="id" value="@fixado.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm rounded-circle shadow" title="Desfixar evento" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-pin-angle"></i>
+                                </button>
+                            </form>
+                        }
+
+                        <img src="@Url.Action("Imagem", "Fixados", new { id = fixado.Id })"
+                             class="card-img-top rounded-top"
+                             alt="@fixado.Titulo"
+                             style="height: 220px; object-fit: cover;" />
+
+
+
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-primary">@fixado.Titulo</h5>
+                            <p class="card-text text-muted">@fixado.Descricao</p>
+                            <div class="card-footer bg-white border-0 text-end">
+                                <small class="text-muted">
+                                    Publicado em: @fixado.DataDePostagem.ToString("dd/MM/yyyy")
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center text-muted">
+                Nenhum destaque encontrado.
+            </div>
+        }
+    </div>
+</section>
+
+
+<section class="bg-primary text-white py-5 text-center animate__animated animate__fadeIn">
+    <div class="container">
+        @if (Model.usuario != null)
+        {
+            <h2 class="fw-bold mb-3">Obrigado por fazer parte da nossa comunidade!</h2>
+            <p class="lead mb-4">Queremos saber sua opinião sobre a escola. Deixe seu feedback abaixo 👇</p>
+            <div class="d-flex justify-content-center">
+                <a asp-controller="Feedback" asp-action="Index" class="btn btn-light btn-lg fw-bold px-5 py-3 shadow-sm rounded-pill">
+                    <i class="bi bi-chat-heart-fill me-2"></i>Dar meu Feedback
+                </a>
+            </div>
+        }
+        else
+        {
+            <h2 class="fw-bold mb-3">Participe da Nossa Comunidade Escolar</h2>
+            <p class="lead mb-4">Faça login ou crie sua conta para acompanhar as notícias e deixar seu feedback sobre a escola.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a asp-action="Login" asp-controller="Home" class="btn btn-light fw-semibold px-4 py-2 shadow-sm">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+                </a>
+                <a asp-action="Cadrastro" asp-controller="Home" class="btn btn-outline-light fw-semibold px-4 py-2 shadow-sm">
+                    <i class="bi bi-person-plus-fill me-2"></i>Cadastrar
+                </a>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="container py-5 animate__animated animate__fadeInUp">
+    <div class="row align-items-center g-5">
+        <div class="col-md-6">
+            <img src="~/assets/Imagemverde.png" class="img-fluid rounded shadow-sm" alt="Fachada da escola">
+        </div>
+        <div class="col-md-6">
+            <h2 class="fw-bold text-primary">Sobre a E.E.E.F.M. Prof. Claudionor Ribeiro</h2>
+            <p class="text-muted">Com mais de duas décadas de dedicação à educação pública, nossa escola oferece ensino de excelência, incentivando o pensamento crítico e o protagonismo dos estudantes.</p>
+            <p class="text-muted">Nosso compromisso é formar cidadãos conscientes, éticos e preparados para o futuro.</p>
+            <a asp-action="Index" asp-controller="Sobre" class="btn btn-primary fw-semibold mt-2">
+                <i class="bi bi-info-circle me-2"></i>Saiba mais
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .btn-light {
+        background-color: #fff;
+        color: #0d6efd;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-light:hover {
+            background-color: #f8f9fa;
+            color: #0b5ed7;
+            transform: translateY(-3px);
+        }
+
+    .btn-outline-light:hover {
+        background-color: white;
+        color: #0d6efd;
+        transform: translateY(-3px);
+    }
+
+    .btn-light.btn-lg {
+        font-size: 1.1rem;
+    }
+
+    section.bg-primary {
+        background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+    }
+</style>

@@ -1,0 +1,57 @@
+﻿@model UsuariosModel
+
+@{
+    ViewData["Title"] = "Editar Usuário";
+    Layout = "_LayoutUsuario";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-4 animate__animated animate__fadeInDown">
+        <h1 class="fw-bold text-primary mb-2">
+            <i class="bi bi-pencil-square me-2"></i>Editar Usuário
+        </h1>
+        <p class="text-muted">Atualize as informações do usuário abaixo</p>
+    </div>
+
+    <div class="row justify-content-center animate__animated animate__fadeInUp">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4">
+                    <form asp-action="EditarUsuario" asp-controller="AdminPage" method="post" autocomplete="off">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label for="Nome" class="form-label fw-semibold">
+                                <i class="bi bi-person-circle me-2 text-primary"></i>Nome
+                            </label>
+                            <input type="text" class="form-control form-control-lg" id="Nome" asp-for="Nome" placeholder="Digite o nome completo">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="EmailCadastro" class="form-label fw-semibold">
+                                <i class="bi bi-envelope-at me-2 text-primary"></i>Email
+                            </label>
+                            <input type="email" class="form-control form-control-lg" id="EmailCadastro" asp-for="Email" placeholder="exemplo@dominio.com">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="SenhaCadastro" class="form-label fw-semibold">
+                                <i class="bi bi-lock-fill me-2 text-primary"></i>Senha
+                            </label>
+                            <input type="text" class="form-control form-control-lg" id="SenhaCadastro" asp-for="Senha" placeholder="********">
+                        </div>
+
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm">
+                                <i class="bi bi-save-fill me-2"></i>Salvar Alterações
+                            </button>
+                            <a asp-controller="AdminPage" asp-action="Usuarios" class="btn btn-outline-secondary btn-lg fw-semibold">
+                                <i class="bi bi-arrow-left-circle me-2"></i>Voltar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model EventoUsuarioModel
+
+@{
+    ViewData["Title"] = "Eventos";
+    Layout = "_Layout";
+}
+
+<main class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Eventos da Escola</h2>
+        <p class="text-muted fs-5">
+            Confira os eventos mais recentes realizados pela nossa comunidade escolar.
+        </p>
+    </div>
+
+    <div class="row g-4" style="object-fit:contain !important;">
+        @foreach (var evento in Model.TotalEventos)
+        {
+            <div class="col-md-4 position-relative">
+                <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden">
+
+                    @if (Model.usuario != null && Model.usuario.IsAdmin)
+                    {
+                        <form asp-controller="Eventos" asp-action="CriarFixado" method="post" class="fixar-form">
+                            <input type="hidden" name="id" value="@evento.Id" />
+                            <button type="submit" class="btn-fixar" title="Fixar evento">
+                                <i class="bi bi-pin-angle-fill"></i>
+                            </button>
+                        </form>
+
+                        <form asp-controller="Eventos" asp-action="Excluir" method="post" class="excluir-form">
+                            <input type="hidden" name="id" value="@evento.Id" />
+                            <button type="submit" class="btn-excluir" title="Excluir notícia">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </form>
+                    } 
+
+                    <div class="position-relative">
+                        <div class="img-wrapper">
+                            <img src="@Url.Action("Imagem", "Eventos", new { id = evento.Id })"
+                                 alt="@evento.Titulo"
+                                 class="img-evento" />
+                        </div>
+
+
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-semibold">@evento.Titulo</h5>
+                        <p class="card-text text-muted">@evento.Descricao</p>
+                    </div>
+
+                    <div class="card-footer bg-white border-0 text-end">
+                        <small class="text-muted">
+                            Publicado em: @evento.DataDePostagem.ToString("dd/MM/yyyy")
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</main>

@@ -1,0 +1,67 @@
+﻿@model site_da_escola.Models.DashboardViewModel
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Painel Administrativo";
+}
+
+<div class="container-fluid py-5 animate__animated animate__fadeIn">
+    <div class="text-center mb-5">
+        <h1 class="display-5 d-inline fw-bold text-primary mb-2">
+            <i class="bi bi-speedometer2"></i> Painel Administrativo
+        </h1>
+        
+    </div>
+
+    <div class="row g-4 mb-5 justify-content-center">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3 bg-gradient bg-primary bg-opacity-10">
+                <i class="bi bi-newspaper fs-1 text-primary mb-2"></i>
+                <h5 class="fw-bold">Notícias Publicadas</h5>
+                <p class="display-6 text-primary fw-bold">@Model.TotalNoticias</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3 bg-gradient bg-success bg-opacity-10">
+                <i class="bi bi-calendar-event fs-1 text-success mb-2"></i>
+                <h5 class="fw-bold">Eventos Cadastrados</h5>
+                <p class="display-6 text-success fw-bold">@Model.TotalEventos</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3 bg-gradient bg-warning bg-opacity-10">
+                <i class="bi bi-people fs-1 text-warning mb-2"></i>
+                <h5 class="fw-bold">Usuários Ativos</h5>
+                <p class="display-6 text-warning fw-bold">@Model.TotalUsuarios</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 h-100 text-center card-hover">
+                <div class="card-body">
+                    <i class="bi bi-newspaper text-primary fs-1 mb-3"></i>
+                    <h5 class="card-title fw-bold">Postar Notícia</h5>
+                    <p class="text-muted">Adicione novas notícias e mantenha a comunidade informada.</p>
+                    <a asp-controller="AdminPage" asp-action="PostarNoticia" class="btn btn-primary w-100">
+                        <i class="bi bi-pencil-square"></i> Criar Notícia
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 h-100 text-center card-hover">
+                <div class="card-body">
+                    <i class="bi bi-calendar-event text-success fs-1 mb-3"></i>
+                    <h5 class="card-title fw-bold">Postar Evento</h5>
+                    <p class="text-muted">Compartilhe com todos os alunos e pais os próximos eventos da escola</p>
+                    <a asp-controller="AdminPage" asp-action="PostarEventos" class="btn btn-success w-100">
+                        <i class="bi bi-plus-circle"></i> Novo Evento
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model UsuariosModel
+
+@{
+    ViewData["Title"] = "Apagar Usuário";
+    Layout = "_LayoutUsuario";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5 animate__animated animate__fadeInDown">
+        <div class="alert alert-danger shadow-sm border-0 rounded-4 py-4">
+            <i class="bi bi-exclamation-triangle-fill fs-2 mb-2"></i>
+            <h1 class="fw-bold text-danger">Atenção!</h1>
+            <p class="lead mb-0">Esta ação é irreversível. Todos os dados do usuário serão <strong>removidos permanentemente</strong>.</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center animate__animated animate__fadeInUp">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body text-center p-4">
+                    <h4 class="fw-semibold mb-4">
+                        Deseja realmente excluir o usuário <span class="text-primary">@Model.Nome</span>?
+                    </h4>
+
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <a asp-controller="AdminPage" asp-action="Usuarios"
+                           class="btn btn-outline-secondary btn-lg fw-semibold px-4 rounded-3">
+                            <i class="bi bi-arrow-left-circle me-2"></i>Cancelar
+                        </a>
+
+                        <a asp-route-id="@Model.Id" asp-action="ApagarUsuario" asp-controller="AdminPage"
+                           class="btn btn-danger btn-lg fw-bold px-4 shadow-sm rounded-3">
+                            <i class="bi bi-trash3-fill me-2"></i>Apagar Usuário
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

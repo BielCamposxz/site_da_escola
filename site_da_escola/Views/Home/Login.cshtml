@@ -1,0 +1,47 @@
+﻿@model UsuarioSemNomeModel
+@{
+    Layout = "_Layout"; 
+    ViewData["Title"] = "Login";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="text-center mb-4 animate__animated animate__fadeInDown">
+                <h1 class="fw-bold text-primary">Bem-vindo!</h1>
+            </div>
+
+            <div class="card shadow-lg rounded-4 border-0 animate__animated animate__fadeInUp">
+                <div class="card-header text-center bg-primary text-white rounded-top-4 py-4">
+                    <h3 class="mb-0"><i class="bi bi-box-arrow-in-right me-2"></i>Login</h3>
+                    <p class="small mb-0">Entre com seu email e senha</p>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Login" asp-controller="Home" method="post">
+                        <div class="mb-3 position-relative">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" class="form-control ps-2" id="Email" name="Email" asp-for="Email" placeholder="seuemail@exemplo.com">
+                            @Html.ValidationMessageFor(ms => ms.Email)
+                        </div>
+                        <div class="mb-3 position-relative">
+                            <label for="Senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control ps-2" id="Senha" name="Senha" asp-for="Senha" placeholder="********">
+                            @Html.ValidationMessageFor(ms => ms.Senha)
+
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">Entrar</button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="mb-1">Ainda não tem uma conta?</p>
+                        <a asp-action="Cadrastro" asp-controller="Home" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-person-plus-fill me-2"></i>Cadastre-se
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

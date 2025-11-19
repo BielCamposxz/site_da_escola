@@ -1,0 +1,120 @@
+﻿@model List<UsuariosModel>
+
+@{
+    ViewData["Title"] = "Gerenciamento de Usuários";
+    Layout = "_LayoutUsuario";
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        <div class="toast align-items-center text-bg-success border-0 show animate__animated animate__fadeInDown" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle-fill me-2"></i>@TempData["MensagemSucesso"]
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        <div class="toast align-items-center text-bg-danger border-0 show animate__animated animate__fadeInDown" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["MensagemErro"]
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container py-5">
+    <div class="text-center mb-4 animate__animated animate__fadeInDown">
+        <h1 class="fw-bold text-primary"><i class="bi bi-people-fill me-2"></i>Gerenciamento de Usuários</h1>
+        <p class="text-muted mb-4">Visualize, edite e gerencie todos os usuários cadastrados na plataforma.</p>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a asp-action="Index" asp-controller="AdminPage" class="btn btn-outline-secondary shadow-sm fw-semibold">
+                <i class="bi bi-arrow-left-circle me-2"></i>Voltar ao Painel
+            </a>
+            <a asp-action="Cadrastro" asp-controller="Home" class="btn btn-primary shadow-sm fw-semibold">
+                <i class="bi bi-person-plus-fill me-2"></i>Novo Usuário
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive animate__animated animate__fadeInUp">
+        <table class="table align-middle table-hover shadow-sm rounded-3 overflow-hidden">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Senha</th>
+                    <th scope="col" class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UsuariosModel usuario in Model)
+                {
+                    <tr class="bg-white">
+                        <th scope="row" class="text-center fw-bold">@usuario.Id</th>
+                        <td>@usuario.Nome</td>
+                        <td>@usuario.Email</td>
+                        <td>
+                            <span class="text-muted">••••••••</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group shadow-sm" role="group">
+                                <a asp-route-id="@usuario.Id" asp-controller="AdminPage" asp-action="EditarUsuario"
+                                   class="btn btn-sm btn-outline-primary fw-semibold px-3">
+                                    <i class="bi bi-pencil-square me-1"></i>Editar
+                                </a>
+                                <a asp-route-id="@usuario.Id" asp-controller="AdminPage" asp-action="ApagarUsuario"
+                                   class="btn btn-sm btn-outline-danger fw-semibold px-3">
+                                    <i class="bi bi-trash3-fill me-1"></i>Apagar
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    table {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    thead {
+        background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+        color: white;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f7ff !important;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #6c757d;
+        color: white;
+    }
+</style>

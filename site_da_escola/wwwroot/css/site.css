@@ -1,0 +1,324 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.excluir-form {
+    position: absolute;
+    top: 10px;
+    right: 60px; 
+    z-index: 20;
+}
+
+.btn-excluir {
+    background: linear-gradient(135deg, #ff4d4f, #ff6b6b);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(3px);
+}
+
+    .btn-excluir:hover {
+        transform: translateY(-3px) scale(1.05) rotate(10deg);
+        box-shadow: 0 8px 18px rgba(255, 77, 79, 0.35);
+    }
+
+
+
+body {
+  margin-bottom: 60px;
+}
+
+html, body {
+    height: 100%;
+}
+
+
+.destaques h3 {
+    color: #0a57b3;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card h4 {
+    font-size: 1.1rem;
+    color: #0a57b3;
+    margin: 12px 12px 6px;
+}
+
+.card p {
+    color: #444;
+    margin: 0 12px 16px 12px;
+    font-size: 0.95rem;
+}
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    backdrop-filter: blur(6px);
+    transition: all 0.3s ease-in-out;
+}
+
+footer:hover {
+    background-color: #0b5ed7 !important;
+    transform: translateY(-2px);
+}
+
+
+
+.navbar-nav .nav-link {
+    transition: all 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    transform: scale(1.05);
+}
+
+.card {
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.card {
+    border-radius: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+.display-5 {
+    font-size: 2.5rem;
+}
+
+.animate__animated {
+    animation-duration: 0.8s;
+}
+
+header .display-5 {
+    text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+}
+
+header .lead {
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+header .btn-outline-light {
+    transition: all 0.3s ease;
+}
+
+    header .btn-outline-light:hover {
+        background-color: rgba(255,255,255,0.9);
+        color: #0d6efd;
+    }
+
+header .btn-light {
+    transition: all 0.3s ease;
+}
+
+    header .btn-light:hover {
+        background-color: #e6e6e6;
+    }
+
+.hero-header {
+    height: 280px;
+    background: url('../assets/Imagemfrente.png') center no-repeat;
+    position: relative;
+    background-attachment: fixed;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4));
+}
+
+.hero-content {
+    z-index: 2;
+}
+
+.bg-primary-gradient {
+    background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+}
+
+.navbar-brand:hover {
+    color: #fff !important;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+.hover-underline {
+    position: relative;
+    text-decoration: none;
+}
+
+    .hover-underline::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: white;
+        transition: width 0.3s ease;
+    }
+
+    .hover-underline:hover::after {
+        width: 100%;
+    }
+
+.btn-outline-light:hover {
+    background-color: #fff;
+    color: #0d6efd;
+}
+
+@media (max-width: 768px) {
+    .hero-header {
+        height: 220px;
+    }
+
+    .navbar-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem !important;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+}
+
+
+.fixar-form {
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    z-index: 20;
+}
+
+.btn-fixar {
+    background: linear-gradient(135deg, #0d6efd, #00b4d8);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(3px);
+}
+
+    .btn-fixar:hover {
+        transform: translateY(-3px) scale(1.05) rotate(-10deg);
+        box-shadow: 0 8px 18px rgba(13, 110, 253, 0.35);
+    }
+
+    .btn-fixar.fixo {
+        background: linear-gradient(135deg, #ffc107, #ff8c00);
+        color: #fff;
+        box-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
+    }
+
+.card {
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.8rem 1.8rem rgba(0, 0, 0, 0.15);
+    }
+
+
+.admin-btn {
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 1000; 
+    text-decoration: none;
+}
+
+    .admin-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+    }
+
+.field-validation-error {
+    margin-left: 5px;
+    color:red;
+}
+
+
